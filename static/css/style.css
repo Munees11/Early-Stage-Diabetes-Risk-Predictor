@@ -11,11 +11,10 @@
 
 * { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; -ms-box-sizing:border-box; -o-box-sizing:border-box; box-sizing:border-box; }
 
-html { width: 100%; height:100%; overflow:scroll; }
+html { width: 100%; height:100%; }
 
 body {
 	width: 100%;
-	overflow:scroll;
 	height:100%;
 	font-family: 'Open Sans', sans-serif;
 	background: #092756;
@@ -23,7 +22,7 @@ body {
 	font-size: 25px;
 	text-align:center;
 	letter-spacing:1.2px;
-	position: relative;
+	position: absolute;
 	background: -moz-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%),-moz-linear-gradient(top,  rgba(57,173,219,.25) 0%, rgba(42,60,87,.4) 100%), -moz-linear-gradient(-45deg,  #670d10 0%, #092756 100%);
 	background: -webkit-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -webkit-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -webkit-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
 	background: -o-radial-gradient(0% 100%, ellipse cover, rgba(104,128,138,.4) 10%,rgba(138,114,76,0) 40%), -o-linear-gradient(top,  rgba(57,173,219,.25) 0%,rgba(42,60,87,.4) 100%), -o-linear-gradient(-45deg,  #670d10 0%,#092756 100%);
@@ -33,14 +32,13 @@ body {
 
 }
 .login {
-	position: relative;
+	position: absolute;
 	top: 40%;
 	left: 50%;
 	margin: -150px 0 0 -150px;
 	width:100%;
 	height:100%;
-	overflow:scroll;
-	position: relative;
+	overflow:auto;
 }
 
 .login h1 { color: #fff; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
@@ -64,7 +62,6 @@ input {
 	-o-transition: box-shadow .5s ease;
 	-ms-transition: box-shadow .5s ease;
 	transition: box-shadow .5s ease;
-	overflow:scroll;
-	position: relative;
+
 }
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
