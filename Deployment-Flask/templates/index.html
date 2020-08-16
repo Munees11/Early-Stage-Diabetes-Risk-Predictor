@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title> Early Stage Diabetes Risk Predictor</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+   <style> 
+   h1{text-align:center}
+   h4{text-align:center}
+   h5{text-align:center}
+   footer {
+      text-align: center;
+      padding: 3px;
+
+      color: white;
+}
+
+   </style> 
+</head>
+
+<body>
+ <h1>Diabetes Risk Predictor</h1>
+ <div class="login">
+	
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+        
+        <label for="Age"><h4>Age</h4></label>
+    	<input  type="number" min="16" max="95" name="Age" placeholder="Enter your Age" required="required" />
+    	<br/>
+    	
+    	<label for="Gender"><h4>Gender</h4></label>
+        <input type="radio" name="Gender" id="Male" value="1" placeholder="Gender" required="required" />
+        <label for="Male"><h5>Male</h5></label>
+		<input type="radio" name="Gender" id="Female" value="0" placeholder="Gender" required="required" />
+		<label for="Female"><h5>Female</h5></label><br>
+		<br/>
+		
+		
+		<label for="Polyuria"><h4>Does your body urinates more than usual and passes excessive or abnormally large amounts of urine each time you urinate??</h4></label>
+        <input type="radio" name="Polyuria" id="Yes" value="1" placeholder="Polyuria" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="Polyuria" id="No" value="0" placeholder="Polyuria" required="required" />
+		<label for="No"><h5>No</h5></label><br>
+		<br/>
+		
+		
+		<label for="Polydipsia"><h4>Do you have excessive thirst and temporary or prolonged dryness of the mouth?</h4></label>
+        <input type="radio" name="Polydipsia" id="Yes" value="1" placeholder="Polydipsia" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="Polydipsia" id="No" value="0" placeholder="Polydipsia" required="required" />
+		<label for="No"><h5>No</h5></label><br>	
+		<br/>
+		
+		
+		<label for="sudden weight loss"><h4>Did you face a sudden weight loss?</h4></label>
+        <input type="radio" name="sudden weight loss" id="Yes" value="1" placeholder="sudden weight loss" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="sudden weight loss" id="No" value="0" placeholder="sudden weight loss" required="required" />
+		<label for="No"><h5>No</h5></label><br>
+    	<br/>
+    	
+    	
+    	
+    	<label for="weakness"><h4>Do you feel weak often?</h4></label>
+        <input type="radio" name="weakness" id="Yes" value="1" placeholder="weakness" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="weakness" id="No" value="0" placeholder="weakness" required="required" />
+		<label for="No"><h5>No</h5></label><br>
+		<br/>
+		
+		
+		<label for="Polyphagia"><h4>Do you feel abnormally strong sensation of hunger or desire to eat often?</h4></label>
+        <input type="radio" name="Polyphagia" id="Yes" value="1" placeholder="Polyphagia" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="Polyphagia" id="No" value="0" placeholder="Polyphagia" required="required" />
+		<label for="No"><h5>No</h5></label><br>
+		<br/>
+		
+		
+		
+		<label for="Genital thrush"><h4>Do you feel Genital thrush?</h4></label>
+        <input type="radio" name="Genital thrush" id="Yes" value="1" placeholder="Genital thrush" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="Genital thrush" id="No" value="0" placeholder="Genital thrush" required="required" />
+		<label for="No"><h5>No</h5></label><br>
+		<br/>
+		
+		<label for="visual blurring"><h4>Do you have visual blurring?</h4></label>
+        <input type="radio" name="visual blurring" id="Yes" value="1" placeholder="visual blurring" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="visual blurring" id="No" value="0" placeholder="visual blurring" required="required" />
+		<label for="No"><h5>No</h5></label><br>
+		<br/>
+		
+		
+		<label for="Itching"><h4>Do you have Itching?</h4></label>
+        <input type="radio" name="Itching" id="Yes" value="1" placeholder="Itching" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="Itching" id="No" value="0" placeholder="Itching" required="required" />
+		<label for="No"><h5>No</h5></label><br>
+		<br/>
+		
+		
+		
+		<label for="Irritability"><h4>Do you feel Irritated often?</h4></label>
+        <input type="radio" name="Irritability" id="Yes" value="1" placeholder="Irritability" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="Irritability" id="No" value="0" placeholder="Irritability" required="required" />
+		<label for="No"><h5>No</h5></label><br>
+		<br/>
+		
+		
+		
+		<label for="delayed healing"><h4>Does your wound heals very slowly??</h4></label>
+        <input type="radio" name="delayed healing" id="Yes" value="1" placeholder="delayed healing" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="delayed healing" id="No" value="0" placeholder="delayed healing" required="required" />
+		<label for="No"><h5>No</h5></label><br>
+		<br/>
+		
+		
+		<label for="partial paresis"><h4>Do you feel weakning of muscle?</h4></label>
+        <input type="radio" name="partial paresis" id="Yes" value="1" placeholder="partial paresis" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="partial paresis" id="No" value="0" placeholder="partial paresis" required="required" />
+		<label for="No"><h5>No</h5></label><br>
+		<br/>
+		
+		
+		<label for="muscle stiffness"><h4>Does your muscle tightens or cramp often?</h4></label>
+        <input type="radio" name="muscle stiffness" id="Yes" value="1" placeholder="muscle stiffness" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="muscle stiffness" id="No" value="0" placeholder="muscle stiffness" required="required" />
+		<label for="No"><h5>No</h5></label><br>
+		<br/>
+		
+		
+		<label for="Alopecia"><h4>Do you have hair fall (in patches)?</h4></label>
+        <input type="radio" name="Alopecia" id="Yes" value="1" placeholder="Alopecia" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="Alopecia" id="No" value="0" placeholder="Alopecia" required="required" />
+		<label for="No"><h5>No</h5></label><br>
+		<br/>
+		
+		
+		<label for="Obesity"><h4>Do you have Obesity?</h4></label>
+        <input type="radio" name="Obesity" id="Yes" value="1" placeholder="Obesity" required="required" />
+        <label for="Yes"><h5>Yes</h5></label>
+		<input type="radio" name="Obesity" id="No" value="0" placeholder="Obesity" required="required" />
+		<label for="No"><h5>No</h5></label><br>
+        
+        <br/>
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+        <input type="reset">
+        
+
+    </form>
+
+   <br>
+   <br>
+   
+        <footer> 
+            <nav> 
+                <p> Thank you,
+                Contact us for any feedback
+                </p>
+                <p>
+                    <a href= 
+"https://www.linkedin.com/in/munees11/" style="color:lightsalmon">Linkedin</a>|  
+                    <a href= 
+"https://github.com/Munees11" style="color:lightsalmon">Github</a>
+ 
+                </p> 
+            </nav> 
+            <p>@Muneeswaran</p> 
+        </footer> 
+ </div>
+
+</body>
+
+
+
+
+</html>
